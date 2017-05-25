@@ -23,8 +23,8 @@ import './styles/base.css'
 	const getTestOrder = (id)=>{
 		const orders = {
 			'827362': [tabCap, tabEsp, tabGrn],
+			'114583': [tabEsp, tabGrn, tabCap],
 			'276329': [tabGrn, tabCap, tabEsp],
-			'114583': [tabEsp, tabGrn, tabCap]
 		}
 		if (orders.hasOwnProperty(id)) return orders[id]
 		return orders['827362']
