@@ -10819,19 +10819,19 @@ const data = [
 	"Volleyball - 2007",
 	"Volleyball - 2006",
 	"Volleyball - 2005",
-	"Water Polo - 2017",
-	"Water Polo - 2016",
-	"Water Polo - 2015",
-	"Water Polo - 2014",
-	"Water Polo - 2013",
-	"Water Polo - 2012",
-	"Water Polo - 2011",
-	"Water Polo - 2010",
-	"Water Polo - 2009",
-	"Water Polo - 2008",
-	"Water Polo - 2007",
-	"Water Polo - 2006",
-	"Water Polo - 2005",
+	"Hockey - 2017",
+	"Hockey - 2016",
+	"Hockey - 2015",
+	"Hockey - 2014",
+	"Hockey - 2013",
+	"Hockey - 2012",
+	"Hockey - 2011",
+	"Hockey - 2010",
+	"Hockey - 2009",
+	"Hockey - 2008",
+	"Hockey - 2007",
+	"Hockey - 2006",
+	"Hockey - 2005",
 	"Football - 2017",
 	"Football - 2016",
 	"Football - 2015",
@@ -10847,9 +10847,16 @@ const data = [
 	"Golf - 2015",
 	"Golf - 2014",
 	"Golf - 2013",
-	"Alumni Association",
-	"Premium Alumni Association",
-	"Royal Alumni Association",
+	"Student Association",
+	"Grand Student Association",
+	"Premium Student Association",
+	"Royal Student Association",
+	"Gold Student Association",
+	"Silver Student Association",
+	"Platinum Student Association",
+	"Diamond Student Association",
+	"Student Athletes Coalition",
+	"Student Artist Guild",
 	"Men's Baseball - 2017",
 	"Men's Baseball - 2016",
 	"Men's Baseball - 2015",
@@ -13548,7 +13555,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 	const typer= $('#typer')
 	const notFoundTags = (o)=>`<div class="tt-notfound">No matching results for <span>${o.query}</span></div>`
-	const viewAll = ()=>`<div class="tt-viewall tt-selectable">View All</div>`
+
 	const dataSource = new __WEBPACK_IMPORTED_MODULE_1_imports_loader_define_false_modules_bloodhound__({
 		local: [...useData],
 		queryTokenizer: __WEBPACK_IMPORTED_MODULE_1_imports_loader_define_false_modules_bloodhound__["tokenizers"].whitespace,
@@ -13567,7 +13574,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 	const initView = (view = cap)=>{
+
 		const elem = $('.tab-button[data-type="'+view+'"]')
+		const getViewAllFn = (wording = "View All")=>()=>`<div class="tt-viewall tt-selectable">${wording}</div>`
+
 		let typeConfig = {
 			name: 'typedata',
 			source: dataSource,
@@ -13586,7 +13596,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 		switch (view){
 			case cap:
-				typeConfig.templates.footer = viewAll
+				typeConfig.templates.footer = getViewAllFn()
 				break
 			case esp:
 				break
@@ -13596,14 +13606,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 					let hintGroup = $(e.target).parent()
 					hintGroup.find('.tt-selectable:first').addClass('tt-cursor')
 					if (hintGroup.find('.tt-selectable').length > 10){
-						hintGroup.find('.tt-selectable').eq(10).removeClass('tt-selectable').hide().after(viewAll())
+						hintGroup.find('.tt-selectable').eq(10).remove()
+						hintGroup.find('.tt-selectable:last').after(getViewAllFn('View More')())
 					}
 				}
 				break
 		}
 
+		typer.unbind('typeahead:render')
+		typer.typeahead('val', '')
 		typer.typeahead('destroy')
-		typer.val('')
 		typer.typeahead({
 			minLength: 2,
 			highlight: true,
@@ -13678,7 +13690,7 @@ exports = module.exports = __webpack_require__(1)(undefined);
 
 
 // module
-exports.push([module.i, "body{\n\tfont-size: 15px;\n\tfont-family: 'Roboto-Web', sans-serif;\n\tcolor:#333;\n\tbackground-color: #e6d6a5;\n\tfill: #5b4331;\n\ttransition: background-color 1s ease-in-out, fill 0.6s ease-in-out;\n}\n\nbody.cap{\n\tbackground-color: #e6d6a5;\n\tfill: #5b4331;\n}\nbody.esp{\n\tbackground-color: #342d2a;\n\tfill: #b79c5e;\n}\nbody.grn{\n\tbackground-color: #88a162;\n\tfill: #f1f8d6;\n}\n\n.header {\n\twidth: 400px;\n\theight: 160px;\n\tmargin: -40px auto 0;\n\toverflow: hidden;\n}\n\n.app{\n\twidth: 600px;\n\tpadding: 20px;\n\tmargin: 10px auto 300px;\n}\n\n.tabs{\n\toverflow: auto;\n}\n\n.tab-button{\n\tfloat: left;\n\twidth: 169px;\n\ttext-align: center;\n\tpadding: 15px;\n\tbackground-color: #f2f2f2;\n\tborder-right: 1px solid #ddd;\n\tcursor: pointer;\n\tcolor: #666\n}\n\n.tab-button:hover{\n\tcolor:#222;\n\tbackground-color: #e3e3e3;\n}\n\n.tab-button.active,\n.tab-button.active:hover{\n\tbackground-color: #555;\n\tcolor: #fff;\n\tfont-weight: bold;\n\tcursor: default;\n}\n\n.tab-button:last-of-type{\n\tborder:0;\n\twidth:170px;\n}\n\n.content{\n\tbackground-color: #f8f8f8;\n\tborder-top: 1px solid #ddd;\n\tpadding: 30px 20px;\n}\n\n.instruction{\n\tcolor: #555;\n}\n\n.instruction > span{\n\tcolor: #ef6c00;\n}\n\n.input-wrapper{\n\tmargin-bottom: 40px;\n}\n\n.type-input,\n.tt-menu,\n.tt-query,\n.tt-notfound,\n.tt-hint{\n\tfont-size: 14px;\n\theight: 34px;\n\twidth: 250px;\n\tpadding: 7px 10px;\n\tcolor: #555;\n\tborder: 1px solid #c6c6c6;\n\toutline: 0;\n\tbackground-color: #fff;\n\ttransition: all 0.2s ease-in-out;\n}\n.type-input:focus{\n\tborder-color: #ef6c00;\n\tbox-shadow: 0 2px 4px rgba(239,108,0,0.26);\n}\n.type-input::placeholder{\n\tcolor: #bbb;\n\tfont-style: italic;\n}\n.tt-hint{\n\tcolor: #bbb;\n}\n.tt-menu{\n\theight: auto;\n\tpadding: 0;\n\toverflow: auto;\n}\n.tt-suggestion{\n\tpadding: 7px 10px;\n\twhite-space: nowrap;\n\toverflow: hidden;\n\ttext-overflow: ellipsis;\n}\n\n.tt-selectable{\n\tborder-bottom: 1px solid #ddd;\n}\n\n.tt-selectable:hover{\n\tcursor: pointer;\n\tcolor: #555;\n\tbackground-color: #ddd;\n}\n\n.tt-viewall{\n\tbackground-image: url(" + __webpack_require__(16) + ");\n\tbackground-repeat: no-repeat;\n\tbackground-position: 95% center;\n}\n\n.tt-notfound{\n\tmargin-top: -1px;\n}\n\n.tt-viewall,\n.tt-notfound{\n\theight: 14px;\n\tfont-size: 12px;\n\tpadding: 9px 10px 8px;\n\twhite-space: nowrap;\n\toverflow: hidden;\n\ttext-overflow: ellipsis;\n\tcolor: #555;\n}\n\n.tt-notfound > span,\n.tt-highlight{\n\tcolor: #ef6c00;\n\tfont-weight:700;\n}\n.tt-cursor{\n\tcolor: #555;\n\tbackground-color: #ddd;\n}\n\n.magnifying-glass{\n\twidth: 34px;\n\theight: 34px;\n\tbackground-image: url(" + __webpack_require__(17) + ");\n\tbackground-size: contain;\n\tdisplay: inline-block;\n\tposition: relative;\n\ttop: 34px;\n\tmargin-left: -5px;\n\tcursor: pointer;\n}\n\n.featherlight .featherlight-content{\n\twidth: 500px;\n\tpadding: 0 !important;\n}\n\n.featherlight-inner{\n\tpadding: 15px;\n}\n\n.modal-header {\n\tfont-size: 17px;\n\tbackground-color: #2a69b7;\n\tcolor: white;\n\n}\n\n.modal-body{\n\tfont-size:14px;\n}\n\n.featherlight .featherlight-close-icon{\n\ttop: 10px;\n\tright: 10px;\n\tcolor: white;\n\tbackground-color: transparent;\n}\n\n.results-area{\n\theight: 420px;\n}\n\n.search-table {\n\tmargin-top: 30px;\n\tborder: 1px solid #ccc;\n}\n\n.search-table-no-results{\n\tpadding: 10px;\n\ttext-align: center;\n}\n\n.search-table-header-row {\n\tpadding: 12px 10px;\n\tbackground-color: #ddd;\n\tborder-bottom: 1px solid #bbb;\n\tcolor: #6a6a6a;\n\tfont-weight: bold;\n\tfont-size: 12px;\n}\n\n.search-table-rows{\n\tmax-height: 368px;\n\toverflow: auto;\n}\n\n.search-table-row{\n\tpadding: 12px 10px;\n\tborder-bottom: 1px solid #bbb;\n\tcursor: pointer;\n}\n\n.search-table-row:hover{\n\tbackground-color: #d9d9d9;\n}\n\n.search-table-row:last-child {\n\tborder: 0;\n}", ""]);
+exports.push([module.i, "body{\n\tfont-size: 15px;\n\tfont-family: 'Roboto-Web', sans-serif;\n\tcolor:#333;\n\tbackground-color: #e6d6a5;\n\tfill: #5b4331;\n\ttransition: background-color 1s ease-in-out, fill 0.6s ease-in-out;\n}\n\nbody.cap{\n\tbackground-color: #e6d6a5;\n\tfill: #5b4331;\n}\nbody.esp{\n\tbackground-color: #342d2a;\n\tfill: #b79c5e;\n}\nbody.grn{\n\tbackground-color: #88a162;\n\tfill: #f1f8d6;\n}\n\n.header {\n\twidth: 400px;\n\theight: 160px;\n\tmargin: -40px auto 0;\n\toverflow: hidden;\n}\n\n.app{\n\twidth: 600px;\n\tpadding: 20px;\n\tmargin: 10px auto 300px;\n}\n\n.tabs{\n\toverflow: auto;\n}\n\n.tab-button{\n\tfloat: left;\n\twidth: 169px;\n\ttext-align: center;\n\tpadding: 15px;\n\tbackground-color: #f2f2f2;\n\tborder-right: 1px solid #ddd;\n\tcursor: pointer;\n\tcolor: #666\n}\n\n.tab-button:hover{\n\tcolor:#222;\n\tbackground-color: #e3e3e3;\n}\n\n.tab-button.active,\n.tab-button.active:hover{\n\tbackground-color: #555;\n\tcolor: #fff;\n\tfont-weight: bold;\n\tcursor: default;\n}\n\n.tab-button:last-of-type{\n\tborder:0;\n\twidth:170px;\n}\n\n.content{\n\tbackground-color: #f8f8f8;\n\tborder-top: 1px solid #ddd;\n\tpadding: 30px 20px;\n}\n\n.instruction{\n\tcolor: #555;\n}\n\n.instruction > span{\n\tcolor: #ef6c00;\n}\n\n.input-wrapper{\n\tmargin-bottom: 40px;\n}\n\n.type-input,\n.tt-menu,\n.tt-query,\n.tt-notfound,\n.tt-hint{\n\tfont-size: 14px;\n\theight: 34px;\n\twidth: 250px;\n\tpadding: 7px 10px;\n\tcolor: #555;\n\tborder: 1px solid #c6c6c6;\n\toutline: 0;\n\tbackground-color: #fff;\n\ttransition: all 0.2s ease-in-out;\n}\n.type-input:focus{\n\tborder-color: #ef6c00;\n\tbox-shadow: 0 2px 4px rgba(239,108,0,0.26);\n}\n.type-input::placeholder{\n\tcolor: #bbb;\n\tfont-style: italic;\n}\n.tt-hint{\n\tcolor: #bbb;\n}\n.tt-menu{\n\theight: auto;\n\tpadding: 0;\n\toverflow: hidden;\n}\n.tt-suggestion{\n\tpadding: 7px 10px;\n\twhite-space: nowrap;\n\toverflow: hidden;\n\ttext-overflow: ellipsis;\n}\n\n.tt-selectable{\n\tborder-bottom: 1px solid #ddd;\n}\n\n.tt-selectable:hover{\n\tcursor: pointer;\n\tcolor: #555;\n\tbackground-color: #ddd;\n}\n\n.tt-viewall{\n\tbackground-image: url(" + __webpack_require__(16) + ");\n\tbackground-repeat: no-repeat;\n\tbackground-position: 95% center;\n}\n\n.tt-notfound{\n\tmargin-top: -1px;\n}\n\n.tt-viewall,\n.tt-notfound{\n\theight: 14px;\n\tfont-size: 12px;\n\tpadding: 9px 10px 8px;\n\twhite-space: nowrap;\n\toverflow: hidden;\n\ttext-overflow: ellipsis;\n\tcolor: #555;\n}\n\n.tt-notfound > span,\n.tt-highlight{\n\tcolor: #ef6c00;\n\tfont-weight:700;\n}\n.tt-cursor{\n\tcolor: #555;\n\tbackground-color: #ddd;\n}\n\n.magnifying-glass{\n\twidth: 34px;\n\theight: 34px;\n\tbackground-image: url(" + __webpack_require__(17) + ");\n\tbackground-size: contain;\n\tdisplay: inline-block;\n\tposition: relative;\n\ttop: 34px;\n\tmargin-left: -5px;\n\tcursor: pointer;\n}\n\n.featherlight .featherlight-content{\n\twidth: 500px;\n\tpadding: 0 !important;\n}\n\n.featherlight-inner{\n\tpadding: 15px;\n}\n\n.modal-header {\n\tfont-size: 17px;\n\tbackground-color: #2a69b7;\n\tcolor: white;\n\n}\n\n.modal-body{\n\tfont-size:14px;\n}\n\n.featherlight .featherlight-close-icon{\n\ttop: 10px;\n\tright: 10px;\n\tcolor: white;\n\tbackground-color: transparent;\n}\n\n.results-area{\n\theight: 420px;\n}\n\n.search-table {\n\tmargin-top: 30px;\n\tborder: 1px solid #ccc;\n}\n\n.search-table-no-results{\n\tpadding: 10px;\n\ttext-align: center;\n}\n\n.search-table-header-row {\n\tpadding: 12px 10px;\n\tbackground-color: #ddd;\n\tborder-bottom: 1px solid #bbb;\n\tcolor: #6a6a6a;\n\tfont-weight: bold;\n\tfont-size: 12px;\n}\n\n.search-table-rows{\n\tmax-height: 368px;\n\toverflow: auto;\n}\n\n.search-table-row{\n\tpadding: 12px 10px;\n\tborder-bottom: 1px solid #bbb;\n\tcursor: pointer;\n}\n\n.search-table-row:hover{\n\tbackground-color: #d9d9d9;\n}\n\n.search-table-row:last-child {\n\tborder: 0;\n}", ""]);
 
 // exports
 

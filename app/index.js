@@ -37,7 +37,7 @@ import './styles/base.css'
 
 	const typer= $('#typer')
 	const notFoundTags = (o)=>`<div class="tt-notfound">No matching results for <span>${o.query}</span></div>`
-	const viewAll = ()=>`<div class="tt-viewall tt-selectable">View All</div>`
+
 	const dataSource = new Bloodhound({
 		local: [...useData],
 		queryTokenizer: Bloodhound.tokenizers.whitespace,
@@ -56,7 +56,10 @@ import './styles/base.css'
 
 
 	const initView = (view = cap)=>{
+
 		const elem = $('.tab-button[data-type="'+view+'"]')
+		const getViewAllFn = (wording = "View All")=>()=>`<div class="tt-viewall tt-selectable">${wording}</div>`
+
 		let typeConfig = {
 			name: 'typedata',
 			source: dataSource,
@@ -75,7 +78,7 @@ import './styles/base.css'
 
 		switch (view){
 			case cap:
-				typeConfig.templates.footer = viewAll
+				typeConfig.templates.footer = getViewAllFn()
 				break
 			case esp:
 				break
@@ -85,14 +88,16 @@ import './styles/base.css'
 					let hintGroup = $(e.target).parent()
 					hintGroup.find('.tt-selectable:first').addClass('tt-cursor')
 					if (hintGroup.find('.tt-selectable').length > 10){
-						hintGroup.find('.tt-selectable').eq(10).removeClass('tt-selectable').hide().after(viewAll())
+						hintGroup.find('.tt-selectable').eq(10).remove()
+						hintGroup.find('.tt-selectable:last').after(getViewAllFn('View More')())
 					}
 				}
 				break
 		}
 
+		typer.unbind('typeahead:render')
+		typer.typeahead('val', '')
 		typer.typeahead('destroy')
-		typer.val('')
 		typer.typeahead({
 			minLength: 2,
 			highlight: true,

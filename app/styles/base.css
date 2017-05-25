@@ -113,7 +113,7 @@ body.grn{
 .tt-menu{
 	height: auto;
 	padding: 0;
-	overflow: auto;
+	overflow: hidden;
 }
 .tt-suggestion{
 	padding: 7px 10px;
