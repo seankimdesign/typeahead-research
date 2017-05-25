@@ -30,7 +30,7 @@ body.grn{
 .app{
 	width: 600px;
 	padding: 20px;
-	margin: 10px auto;
+	margin: 10px auto 300px;
 }
 
 .tabs{
@@ -113,6 +113,7 @@ body.grn{
 .tt-menu{
 	height: auto;
 	padding: 0;
+	overflow: auto;
 }
 .tt-suggestion{
 	padding: 7px 10px;

@@ -87,6 +87,8 @@ import './styles/base.css'
 		if (e.key === 'Enter' || e.which === 13){
 			if (viewall && viewall.hasClass('tt-cursor')){
 				triggerModal()
+			} else if (typer.typeahead('val').trim() === ''){
+				triggerModal()
 			}
 		}
 	})
@@ -99,10 +101,14 @@ import './styles/base.css'
 	})
 
 	function triggerModal(){
-		const curVal = typer.typeahead('val')
-		dataSource.search(curVal, (matching)=>{
-			$.featherlight(generateContent(curVal, matching, useData.length))
-		})
+		const curVal = typer.typeahead('val').trim()
+		if (curVal === ''){
+			$.featherlight(generateContent(curVal, useData, useData.length))
+		} else {
+			dataSource.search(curVal, (matching) => {
+				$.featherlight(generateContent(curVal, matching, useData.length))
+			})
+		}
 	}
 
 })()

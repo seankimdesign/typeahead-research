@@ -25,7 +25,11 @@ const data = [
 	"Football - 2013",
 	"Alumni Association",
 	"Premium Alumni Association",
-	"Royal Alumni Association"
+	"Royal Alumni Association",
+	"Men's Baseball - 2013",
+	"Men's Baseball - 2012",
+	"Men's Baseball - 2011",
+	""
 ]
 
 export default data
