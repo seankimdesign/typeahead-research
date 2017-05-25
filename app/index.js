@@ -99,7 +99,9 @@ import './styles/base.css'
 
 	$('.tab-button').on('click', (e)=>{
 		const elem = $(e.target)
-		initView(elem.data().type, elem)
+		if (!elem.hasClass('active')){
+			initView(elem.data().type, elem)
+		}
 	})
 
 	$(document).on('click', '.search-table-row', (e)=>{
