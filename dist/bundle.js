@@ -10837,6 +10837,16 @@ const data = [
 	"Football - 2015",
 	"Football - 2014",
 	"Football - 2013",
+	"Tennis - 2017",
+	"Tennis - 2016",
+	"Tennis - 2015",
+	"Tennis - 2014",
+	"Tennis - 2013",
+	"Golf - 2017",
+	"Golf - 2016",
+	"Golf - 2015",
+	"Golf - 2014",
+	"Golf - 2013",
 	"Alumni Association",
 	"Premium Alumni Association",
 	"Royal Alumni Association",
@@ -13524,8 +13534,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 	const getTestOrder = (id)=>{
 		const orders = {
 			'827362': [tabCap, tabEsp, tabGrn],
+			'114583': [tabEsp, tabGrn, tabCap],
 			'276329': [tabGrn, tabCap, tabEsp],
-			'114583': [tabEsp, tabGrn, tabCap]
 		}
 		if (orders.hasOwnProperty(id)) return orders[id]
 		return orders['827362']
