@@ -29,7 +29,7 @@ const data = [
 	"Men's Baseball - 2013",
 	"Men's Baseball - 2012",
 	"Men's Baseball - 2011",
-	""
+	"Intercollegiate Sports"
 ]
 
 export default data

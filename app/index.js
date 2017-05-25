@@ -27,6 +27,8 @@ import './styles/base.css'
 		datumTokenizer: Bloodhound.tokenizers.whitespace
 	})
 
+	let modal
+
 	$('.modal-trigger').on('click', triggerModal)
 
 	$('.header').html(logoSvg)
@@ -100,13 +102,21 @@ import './styles/base.css'
 		initView(elem.data().type, elem)
 	})
 
+	$(document).on('click', '.search-table-row', (e)=>{
+		const elem = $(e.target)
+		if (modal){
+			typer.val(elem.text())
+			modal.close()
+		}
+	})
+
 	function triggerModal(){
 		const curVal = typer.typeahead('val').trim()
 		if (curVal === ''){
-			$.featherlight(generateContent(curVal, useData, useData.length))
+			modal = $.featherlight(generateContent(curVal, useData, useData.length))
 		} else {
 			dataSource.search(curVal, (matching) => {
-				$.featherlight(generateContent(curVal, matching, useData.length))
+				modal = $.featherlight(generateContent(curVal, matching, useData.length))
 			})
 		}
 	}
