@@ -10793,6 +10793,19 @@ const data = [
 	"Soccer - 2010 Women's Division",
 	"Soccer - 2009 Women's Division",
 	"Soccer - 2008 Women's Division",
+	"Softball - 2017",
+	"Softball - 2016",
+	"Softball - 2015",
+	"Softball - 2014",
+	"Softball - 2013",
+	"Softball - 2012",
+	"Softball - 2011",
+	"Softball - 2010",
+	"Softball - 2009",
+	"Softball - 2008",
+	"Softball - 2007",
+	"Softball - 2006",
+	"Softball - 2005",
 	"Football - 2017",
 	"Football - 2016",
 	"Football - 2015",
@@ -10801,6 +10814,10 @@ const data = [
 	"Alumni Association",
 	"Premium Alumni Association",
 	"Royal Alumni Association",
+	"Men's Baseball - 2017",
+	"Men's Baseball - 2016",
+	"Men's Baseball - 2015",
+	"Men's Baseball - 2014",
 	"Men's Baseball - 2013",
 	"Men's Baseball - 2012",
 	"Men's Baseball - 2011",
@@ -13565,7 +13582,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 	$(document).on('click', '.search-table-row', (e)=>{
 		const elem = $(e.target)
 		if (modal){
-			typer.val(elem.text())
+			typer.typeahead('val', elem.text())
 			modal.close()
 		}
 	})

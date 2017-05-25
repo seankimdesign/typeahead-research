@@ -107,7 +107,7 @@ import './styles/base.css'
 	$(document).on('click', '.search-table-row', (e)=>{
 		const elem = $(e.target)
 		if (modal){
-			typer.val(elem.text())
+			typer.typeahead('val', elem.text())
 			modal.close()
 		}
 	})
