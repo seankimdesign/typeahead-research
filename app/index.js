@@ -12,9 +12,26 @@ import './styles/base.css'
 
 ;(()=>{
 
+	let modal
+
 	const cap = 'cap'
 	const esp = 'esp'
 	const grn = 'grn'
+	const tabCap = {id: cap, elem: '<div class="tab-button tab-button-cap" data-type="cap">Cappuccino</div>'}
+	const tabEsp = {id: esp, elem: '<div class="tab-button tab-button-esp" data-type="esp">Espresso</div>'}
+	const tabGrn = {id: grn, elem: '<div class="tab-button tab-button-grn" data-type="grn">Green Tea Latte</div>'}
+	const getTestOrder = (id)=>{
+		const orders = {
+			'827362': [tabCap, tabEsp, tabGrn],
+			'276329': [tabGrn, tabCap, tabEsp],
+			'114583': [tabEsp, tabGrn, tabCap]
+		}
+		if (orders.hasOwnProperty(id)) return orders[id]
+		return orders['827362']
+	}
+
+	const pageMode = getParameter('mode') || ""
+	const initialPageObj =  getTestOrder(pageMode)[0]
 
 	const useData = Array.isArray(importedData) ? importedData : ['Apple']
 
@@ -27,18 +44,19 @@ import './styles/base.css'
 		datumTokenizer: Bloodhound.tokenizers.whitespace
 	})
 
-	let modal
 
-	$('.modal-trigger').on('click', triggerModal)
+	const prepPage = ()=>{
+		const tabButtonElements = getTestOrder(pageMode).reduce((p,n)=>{
+			return p+n.elem
+		},'')
+		$('div.tabs').html(tabButtonElements)
+		$('.header').html(logoSvg)
+	}
+	prepPage()
 
-	$('.header').html(logoSvg)
 
-	const initView = (view = cap, elem)=>{
-
-		$('.active').removeClass('active')
-		elem.addClass('active')
-		$('body').attr('class', view)
-
+	const initView = (view = cap)=>{
+		const elem = $('.tab-button[data-type="'+view+'"]')
 		let typeConfig = {
 			name: 'typedata',
 			source: dataSource,
@@ -51,6 +69,10 @@ import './styles/base.css'
 			$(e.target).parent().find('.tt-selectable:first').addClass('tt-cursor')
 		}
 
+		$('.active').removeClass('active')
+		elem.addClass('active')
+		$('body').attr('class', view)
+
 		switch (view){
 			case cap:
 				typeConfig.templates.footer = viewAll
@@ -60,7 +82,6 @@ import './styles/base.css'
 			case grn:
 				typeConfig.limit = 11
 				renderFn = (e)=>{
-					console.log('> rendered')
 					let hintGroup = $(e.target).parent()
 					hintGroup.find('.tt-selectable:first').addClass('tt-cursor')
 					if (hintGroup.find('.tt-selectable').length > 10){
@@ -77,40 +98,41 @@ import './styles/base.css'
 			highlight: true,
 			autoselect: true
 		}, typeConfig)
-
 		typer.bind('typeahead:render', renderFn)
 
 	}
+	initView(initialPageObj.id)
 
-	initView(cap, $('.active'))
 
-	typer.on('keyup', (e)=>{
-		let viewall = $('.tt-viewall')
-		if (e.key === 'Enter' || e.which === 13){
-			if (viewall && viewall.hasClass('tt-cursor')){
-				triggerModal()
-			} else if (typer.typeahead('val').trim() === ''){
-				triggerModal()
+	const bindHandlers = ()=>{
+		typer.on('keyup', (e)=>{
+			let viewall = $('.tt-viewall')
+			if (e.key === 'Enter' || e.which === 13){
+				if (viewall && viewall.hasClass('tt-cursor')){
+					triggerModal()
+				} else if (typer.typeahead('val').trim() === ''){
+					triggerModal()
+				}
 			}
-		}
-	})
+		})
+		$(document).on('click', '.tt-viewall', triggerModal)
+		$(document).on('click', '.search-table-row', (e)=>{
+			const elem = $(e.target)
+			if (modal){
+				typer.typeahead('val', elem.text())
+				modal.close()
+			}
+		})
+		$('.tab-button').on('click', (e)=>{
+			const elem = $(e.target)
+			if (!elem.hasClass('active')){
+				initView(elem.data().type, elem)
+			}
+		})
+		$('.modal-trigger').on('click', triggerModal)
+	}
+	bindHandlers()
 
-	$(document).on('click', '.tt-viewall', triggerModal)
-
-	$('.tab-button').on('click', (e)=>{
-		const elem = $(e.target)
-		if (!elem.hasClass('active')){
-			initView(elem.data().type, elem)
-		}
-	})
-
-	$(document).on('click', '.search-table-row', (e)=>{
-		const elem = $(e.target)
-		if (modal){
-			typer.typeahead('val', elem.text())
-			modal.close()
-		}
-	})
 
 	function triggerModal(){
 		const curVal = typer.typeahead('val').trim()
@@ -121,6 +143,16 @@ import './styles/base.css'
 				modal = $.featherlight(generateContent(curVal, matching, useData.length))
 			})
 		}
+	}
+
+	function getParameter(name, url) {
+		if (!url) url = window.location.href;
+		name = name.replace(/[\[\]]/g, "\\$&");
+		let regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+			results = regex.exec(url);
+		if (!results) return null;
+		if (!results[2]) return '';
+		return decodeURIComponent(results[2].replace(/\+/g, " "));
 	}
 
 })()
