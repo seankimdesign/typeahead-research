@@ -20,7 +20,7 @@ const generateContent = (queryTerm = '', matching = [], totalLength = 999)=>{
 						${searchResult}
 					</div>
 				</div>
-				<p class="entries-text">${matching.length} of ${totalLength} entries</p>
+				<p class="entries-text">${matching.length} of ${matching.length} entries</p>
 			</div>`
 	)
 }
