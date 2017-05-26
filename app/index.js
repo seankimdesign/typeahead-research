@@ -41,8 +41,11 @@ import './styles/base.css'
 	const dataSource = new Bloodhound({
 		local: [...useData],
 		queryTokenizer: Bloodhound.tokenizers.whitespace,
-		datumTokenizer: Bloodhound.tokenizers.whitespace
+		datumTokenizer: Bloodhound.tokenizers.whitespace,
+		sorter: (a,b)=>a < b
 	})
+
+	console.log(dataSource)
 
 
 	const prepPage = ()=>{

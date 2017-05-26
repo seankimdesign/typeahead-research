@@ -13559,8 +13559,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 	const dataSource = new __WEBPACK_IMPORTED_MODULE_1_imports_loader_define_false_modules_bloodhound__({
 		local: [...useData],
 		queryTokenizer: __WEBPACK_IMPORTED_MODULE_1_imports_loader_define_false_modules_bloodhound__["tokenizers"].whitespace,
-		datumTokenizer: __WEBPACK_IMPORTED_MODULE_1_imports_loader_define_false_modules_bloodhound__["tokenizers"].whitespace
+		datumTokenizer: __WEBPACK_IMPORTED_MODULE_1_imports_loader_define_false_modules_bloodhound__["tokenizers"].whitespace,
+		sorter: (a,b)=>a < b
 	})
+
+	console.log(dataSource)
 
 
 	const prepPage = ()=>{
