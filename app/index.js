@@ -42,7 +42,7 @@ import './styles/base.css'
 		local: [...useData],
 		queryTokenizer: Bloodhound.tokenizers.whitespace,
 		datumTokenizer: Bloodhound.tokenizers.whitespace,
-		sorter: (a,b)=>a < b
+		//sorter: (a,b)=>a < b
 	})
 
 	console.log(dataSource)
